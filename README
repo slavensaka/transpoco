@@ -1,0 +1,14 @@
+make a CRUD app.
+1. The front end should be built in javascript which interacts with a
+2. REST API which needs to be written in PHP.
+
+
+
+
+1. Am I allowed to use PHP & javascript libraries & frameworks or using just PHP and Javascript?
+1. Other than making sure that you provide a javascript front end that talks to a PHP based REST API you are free to pick which ever tools/frameworks you want to use.
+2. Should the front-end by styled with CSS and Javascript, or just a basic outline?
+2. The front end should have styling applied to it
+3. Creating a database with MySQL is ok to do, so that I can persist the data or should it be just
+3. It is preferred that you use a database in order to demonstrate the full functionality of the app.
+

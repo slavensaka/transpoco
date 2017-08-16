@@ -22,3 +22,35 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+
+$factory->define(App\Test::class, function (Faker\Generator $faker) {
+	$userCount = \App\User::all()->count();
+	$user_id = $faker->numberBetween(1, $userCount);
+    return [
+        'test_name' => $faker->word,
+        'intro' => $faker->word,
+        'conclusion' => $faker->sentence,
+        'user_id' => $user_id,
+    ];
+});
+
+$factory->define(App\Question::class, function (Faker\Generator $faker) {
+	$testCount = \App\Test::all()->count();
+	$test_id = $faker->numberBetween(1, $testCount);
+    return [
+        'question' => $faker->sentence,
+        'points' => $faker->numberBetween(1,10),
+        'test_id' => $test_id,
+    ];
+});
+
+$factory->define(App\Answer::class, function (Faker\Generator $faker) {
+	$questionCount = \App\Question::all()->count();
+	$question_id = $faker->numberBetween(1, $questionCount);
+    return [
+        'answer' => $faker->sentence,
+        'correct' => 0,
+        'question_id' => $question_id,
+    ];
+});

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Log;
-use App\Test;
+use App\Answer;
 use Illuminate\Http\Request;
 
-class TestController extends Controller
+class AnswerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class TestController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -36,16 +35,16 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        Log::info("LOREM DOLEM");
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Test  $test
+     * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function show(Test $test)
+    public function show(Answer $answer)
     {
         //
     }
@@ -53,10 +52,10 @@ class TestController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Test  $test
+     * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Test $test)
+    public function edit(Answer $answer)
     {
         //
     }
@@ -65,10 +64,10 @@ class TestController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Test  $test
+     * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Test $test)
+    public function update(Request $request, Answer $answer)
     {
         //
     }
@@ -76,10 +75,10 @@ class TestController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Test  $test
+     * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Test $test)
+    public function destroy(Answer $answer)
     {
         //
     }

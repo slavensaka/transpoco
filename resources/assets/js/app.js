@@ -8,7 +8,11 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import vueResource from 'vue-resource';
 
+Vue.use(vueResource);
+
+Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name=_token]').attr('content');
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

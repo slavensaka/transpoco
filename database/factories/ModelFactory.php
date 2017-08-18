@@ -31,6 +31,7 @@ $factory->define(App\Test::class, function (Faker\Generator $faker) {
         'test_name' => $faker->word,
         'intro' => $faker->word,
         'conclusion' => $faker->sentence,
+        'intro_image' => $faker->imageUrl($width = 100, $height = 100),
         'user_id' => $user_id,
     ];
 });

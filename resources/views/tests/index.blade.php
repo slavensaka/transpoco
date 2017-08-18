@@ -26,13 +26,48 @@
 					    <td @click="showTest(test.id)">@{{test.intro}}</td>
 					    <td @click="showTest(test.id)">@{{test.conclusion}}</td>
 					    <td @click="showTest(test.id)">@{{test.created_at}}</td>
-					    <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+					    <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" @click="openTestEdit(test)"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
 					    <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
 					</tr>
 				</tbody>
 			</table>
 			<div class="clearfix"></div>
             </div>
+
+		{{-- EDIT MODAL --}}
+		<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Edit Given Test</h4>
+      </div>
+        <div class="modal-body">
+	        <div class="form-group">
+	          	<label for="test_name">Test Name:</label>
+	        	<input id="test_name" v-model="activeTest.test_name" class="form-control " type="text" :value="activeTest.test_name" placeholder="Test name">
+	        		<h4>New name: @{{activeTest.test_name}}</h4>
+	        </div>
+	        <div class="form-group">
+	        	<label for="intro">Intro:</label>
+	        	<textarea rows="2" class="form-control" placeholder="Intro">@{{ activeTest.intro }}</textarea>
+    		</div>
+    		<div class="form-group">
+	        	<label for="conclusion">Conclusion:</label>
+	        	<textarea rows="2" class="form-control" placeholder="Conclusion">@{{activeTest.conclusion}}</textarea>
+    		</div>
+      	</div>
+          <div class="modal-footer ">
+        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+      </div>
+        </div>
+    <!-- /.modal-content -->
+  </div>
+      <!-- /.modal-dialog -->
+</div>
+{{-- END EDIT MODAL --}}
+
+
             </div>
         </div>
 	</div>
@@ -40,7 +75,7 @@
 
 @include('footer')
 
-@include('partials.editTestModal')
+{{-- @include('partials.editTestModal') --}}
 @include('partials.deleteTestModal')
 @include('partials.createTestModal')
 
@@ -51,6 +86,7 @@
     el: '#app',
     data: {
     	tests:tests,
+    	activeTest: {},
     	// users:users,
     	// userTests: userTests,
     },
@@ -61,6 +97,18 @@
     	showTest: function(testId){
     			window.location.href = "{{URL::to('api/tests')}}"+ '/'+ testId
     	},
+    	openTestEdit: function (test) {
+
+            // this.update = true;
+            this.activeTest = JSON.parse(JSON.stringify(test));
+            // $('#sections').val(_.flatMap(this.activeUser.sections, function (val) {
+            //     return val.id;
+            // }));
+            // $('#user-edit-modal').modal('show');
+            // Vue.nextTick(function () {
+                // $('#sections').select2();
+            // });
+        },
     	createTest: function() {
     		console.log(JSON.stringify("CREATETEST"));
     		$('#user-edit-modal').modal('show');
@@ -89,7 +137,10 @@
                 // this.list = response.data;
             // });
         },
-    }
+    },
+    // events: {
+
+    // },
 
 
 });

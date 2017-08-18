@@ -22,5 +22,14 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name=_token]').attr('content')
 Vue.component('example', require('./components/Example.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+    	users:users,
+    	userTests: userTests,
+    },
+    ready() {
+    	console.log(users)
+    }
+
+
 });

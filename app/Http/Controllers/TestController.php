@@ -15,7 +15,9 @@ class TestController extends Controller
      */
     public function index()
     {
-
+    	$tests = Test::all();
+    	\JavaScript::put(compact('tests'));
+    	return view('tests.index');
     }
 
     /**
@@ -36,7 +38,7 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        Log::info("LOREM DOLEM");
+
     }
 
     /**
@@ -47,7 +49,10 @@ class TestController extends Controller
      */
     public function show(Test $test)
     {
-        //
+        $owner = $test->user;
+        $questions = $test->questions;
+        \JavaScript::put(compact('owner', 'test', 'questions'));
+        return view('tests.show');
     }
 
     /**

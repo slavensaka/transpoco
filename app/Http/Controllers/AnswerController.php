@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Answer;
+use App\Question;
 use Illuminate\Http\Request;
 
 class AnswerController extends Controller
@@ -47,6 +48,12 @@ class AnswerController extends Controller
     public function show(Answer $answer)
     {
         //
+    }
+
+    public function showAnswers(Request $request)
+    {
+    	$answers = Question::find($request->questionId)->answers;
+    	return ['success' => true, 'data' => $answers];
     }
 
     /**

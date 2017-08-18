@@ -4,10 +4,16 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Example Component</div>
-
                     <div class="panel-body" @click="sendIt()">
-                        I'm an example component!
+
                     </div>
+
+                    <ul>
+						<li v-for="user in userss">
+							@{{ user }}
+						</li>
+
+					</ul>
                 </div>
             </div>
         </div>
@@ -17,14 +23,24 @@
 <script>
     export default {
 
+
+
+
+
         mounted() {
-            console.log('Component mounted.')
 
         },
-
-
-
-
+       // props: ['users','userTests'],
+       props: {
+   userss: String
+  },
+       created: function () {
+  		},
+       data(){
+            return {
+                // users:users
+            }
+        },
         // components:{
         //     // ItemProductView
         // },
@@ -35,6 +51,7 @@
         // },
         methods: {
         	sendAjax: function() {
+
         		$.ajax({
 		            url: ajax_url + '/api/tests',
 		            type: 'POST',
@@ -46,6 +63,7 @@
 				});
         	},
             sendIt: function() {
+            	console.log(JSON.stringify(users));
             	// GET /someUrl?foo=bar
 				  this.$http.post(ajax_url + '/api/tests', {
 				  	params: {foo: 'bar',
@@ -67,6 +85,10 @@
                     // this.list = response.data;
                 // });
             },
-        }
+        },
+
     }
 </script>
+<style type="text/css">
+
+</style>

@@ -11,16 +11,16 @@ class Test extends Model
 
 	public function user()
 	{
-		return $this->belongsTo('Dipl\User');
+		return $this->belongsTo('App\User');
 	}
 
 	public function questions()
 	{
-		return $this->hasMany('Dipl\Question');
+		return $this->hasMany('App\Question');
 	}
 
 	public function answers()
     {
-        return $this->hasManyThrough('Dipl\Answer', 'Dipl\Question','test_id', 'question_id');
+        return $this->hasManyThrough('App\Answer', 'App\Question','test_id', 'question_id');
     }
 }

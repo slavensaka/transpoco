@@ -12,6 +12,6 @@ class Answer extends Model
 
 	public function question()
 	{
-		return $this->belongsTo('Dipl\Question');
+		return $this->belongsTo('App\Question');
 	}
 }

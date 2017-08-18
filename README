@@ -12,3 +12,6 @@ make a CRUD app.
 3. Creating a database with MySQL is ok to do, so that I can persist the data or should it be just
 3. It is preferred that you use a database in order to demonstrate the full functionality of the app.
 
+
+free to use which ever tooling you want to use, be that vue.js, jquery or other javascript library.
+

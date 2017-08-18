@@ -20,4 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('tests', 'TestController');
 Route::resource('questions', 'QuestionController');
+Route::get('showAnswers', ['uses' => 'AnswerController@showAnswers']);
 Route::resource('answers', 'AnswerController');

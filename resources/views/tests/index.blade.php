@@ -40,7 +40,7 @@
     <div class="modal-content">
           <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <h4 class="modal-title custom_align" id="Heading">Edit Given Test</h4>
+        <h4 class="modal-title custom_align" id="Heading">Edit Test ID:@{{ activeTest.id }}</h4>
       </div>
         <div class="modal-body">
 	        <div class="form-group">
@@ -50,11 +50,11 @@
 	        </div>
 	        <div class="form-group">
 	        	<label for="intro">Intro:</label>
-	        	<textarea rows="2" class="form-control" placeholder="Intro">@{{ activeTest.intro }}</textarea>
+	        	<textarea rows="2" class="form-control" v-model="activeTest.intro" placeholder="Intro">@{{ activeTest.intro }}</textarea>
     		</div>
     		<div class="form-group">
 	        	<label for="conclusion">Conclusion:</label>
-	        	<textarea rows="2" class="form-control" placeholder="Conclusion">@{{activeTest.conclusion}}</textarea>
+	        	<textarea rows="2" class="form-control" v-model="activeTest.conclusion" placeholder="Conclusion">@{{activeTest.conclusion}}</textarea>
     		</div>
       	</div>
           <div class="modal-footer ">

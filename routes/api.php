@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+Route::get('fetchTests', ['uses' => 'TestController@fetchTests']);
 Route::resource('tests', 'TestController');
 Route::resource('questions', 'QuestionController');
 Route::get('showAnswers', ['uses' => 'AnswerController@showAnswers']);

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Log;
+use App\User;
 use App\Test;
 use Illuminate\Http\Request;
 
@@ -15,9 +15,17 @@ class TestController extends Controller
      */
     public function index()
     {
+    	$users = User::all();
     	$tests = Test::all();
-    	\JavaScript::put(compact('tests'));
+    	\JavaScript::put(compact('tests', 'users'));
     	return view('tests.index');
+    }
+
+     public function fetchTests()
+    {
+    	$tests = Test::all();
+    	return $tests;
+    	return ['tests' => $tests];
     }
 
     /**
@@ -38,7 +46,7 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-
+    	\Log::alert($request->all());
     }
 
     /**
@@ -75,7 +83,9 @@ class TestController extends Controller
      */
     public function update(Request $request, Test $test)
     {
-        //
+        $modelTest = Test::find($test->id);
+        $modelTest->update($request->activeTest);
+        return ['success' => true];
     }
 
     /**
@@ -86,6 +96,11 @@ class TestController extends Controller
      */
     public function destroy(Test $test)
     {
-        //
+    	// Item::find($id)->delete();
+     //    return response()->json(['done']);
+    	\Log::alert($test);
+        $test->delete();
+        $test->questions()->delete();
+        $test->answers()->delete();
     }
 }

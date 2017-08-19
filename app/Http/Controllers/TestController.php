@@ -46,7 +46,8 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-    	\Log::alert($request->all());
+    	Test::create($request->all());
+    	return ['success' => true];
     }
 
     /**

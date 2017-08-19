@@ -3,9 +3,7 @@
 	<div class="row">
         <div class="col-md-12">
         <h4>SHOWING ALL TESTS  <button class="btn btn-primary btn-xs" data-title="New test" data-toggle="modal" data-target="#createTest" >NEW TEST</button></h4>
-        <div>
 
-        </div>
         <div id="app">
         <div class="table-responsive">
             <table id="mytable" class="table table-bordred table-striped">
@@ -37,6 +35,7 @@
 					    		<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" @click="openTestEdit(test)"><span class="glyphicon glyphicon-trash"></span></button></p>
 					    </td>
 					</tr>
+
 				</tbody>
 			</table>
 			<div class="clearfix"></div>
@@ -235,8 +234,9 @@
     		this.newTest.intro_image = 'https://lorempixel.com/100/100/?62058'; // Example image
 
 			this.$http.post(ajax_url + '/api/tests',this.newTest).then((response) => {
-				$("#create").modal('hide');
+				$("#createTest").modal('hide');
 				this.fetchTest()
+				new PNotify({title:"Success", text:"Successfully created new test"});
 				 self.createTest = {};
 			  }, (response) => {
 
@@ -271,6 +271,7 @@
 	            self.activeTest = {};
 	        });
 	    },
+
     },
     change: function () {
              console.log(this.selection)

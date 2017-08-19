@@ -2,14 +2,57 @@
 
 <div id="app">
 	<div>@{{owner.name}}</div>
-	<div>
-		@{{ test.test_name }}
+	<div>@{{ test.test_name }}</div>
+
+	<div class="panel-group" id="accordion">
+	    <div v-for="question in questions" @click="showAnswers(question.id)" class="panel panel-default" id="panel1">
+	        <div class="panel-heading">
+	            <h4 class="panel-title">
+	        		<a data-toggle="collapse" :data-target="'#collapse' + question.id" href="#">
+			        	@{{ question.question }}
+	        		</a>
+	      		</h4>
+	        </div>
+
+	        <div :id="'collapse' + question.id" class="panel-collapse collapse">
+	            <div class="panel-body">
+
+					<div class="table-responsive">
+			            <table id="mytable" class="table table-bordred table-striped">
+				           <thead>
+					           	<th>Answer Id</th>
+					           	<th>Answer</th>
+					           	<th>Correct</th>
+					           	<th>Edit</th>
+				                <th>Delete</th>
+				            </thead>
+			    			<tbody :id="'collapse' + question.id">
+
+
+								   {{--  <td>
+								    	<p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" @click="openTestEdit(test)"><span class="glyphicon glyphicon-pencil"></span></button></p>
+								    </td>
+								    <td>
+								    	<p data-placement="top" data-toggle="tooltip" title="Delete">
+								    	<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" @click="openTestEdit(test)"><span class="glyphicon glyphicon-trash"></span></button></p>
+								    </td> --}}
+
+
+
+
+							</tbody>
+						</table>
+						<div class="clearfix"></div>
+			            </div>
+
+
+
+
+	            </div>
+	        </div>
+	    </div>
 	</div>
-	<ul>
-		<li id="questions" @click="showAnswers(question.id)"v-for="question in questions">
-			@{{ question.question }}
-		</li>
-	</ul>
+
 </div>
 
 @include('footer')
@@ -24,52 +67,42 @@
     	answers: '',
     },
     ready() {
-    	console.log(users)
+
     },
     methods: {
-    	createQuestion: function() {
-    			console.log(JSON.stringify("CREATETEST"));
-    		$('#user-edit-modal').modal('show');
-    	},
-    	createAnswer: function() {
-    			console.log(JSON.stringify("CREATETEST"));
-    		$('#user-edit-modal').modal('show');
-    	},
     	showAnswers: function(questionId) {
-        	// POST /tests?foo=bar STORE ROUTE
-			  this.$http.get(ajax_url + '/api/showAnswers', {
-			  	params: {questionId: questionId,
-			 },
-			 headers: {'X-CSRF-Token': token}})
-			  .then(response => {
-			    // success callback
-			    new PNotify({ title: 'Uspjeh', text: "TEST", addclass: 'bg-success' });
-			    	// console.log(JSON.stringify(response.data.success));
-			    	// console.log(JSON.stringify(response.data.data));
-			    	this.answers = response.data.data;
+    		if(!$("tbody#collapse" + questionId).hasClass('active')){
+				this.$http.get(ajax_url + '/api/showAnswers', {
+				  	params: {questionId: questionId,
+				},
+				headers: {'X-CSRF-Token': token}})
+				.then(response => {
+					this.answers = response.data.data;
+					if(this.answers.length != 0 ){
+						$.each( this.answers, function( key, answer ) {
+			                $("tbody#collapse" + questionId).append('<tr><td>' + answer.id + '</td><td>' + answer.answer + '</td><td>' + answer.correct + '</td></tr>');
+			            });
+			        } else {
+			        	$("tbody#collapse" + questionId).append('<tr><td>Empty</td></tr>');
+			        }
+	            $("tbody#collapse" + questionId).addClass('active')
 
-			    	$.each( this.answers, function( key, name ) {
-                            ///-- add the result to the visual page
-                            $("#questions").append('<div class="name">' + name.id + '</div>');
-                        });
-			    	console.log(JSON.stringify(this.answers));
+				}, response => {
 
-			    // $("#questions").show().html("<p>Pronađeno</p>");
-			  }, response => {
-			    // error callback
-			    console.log("ERROR RESPONSE");
-			  });
-      		//   	this.$http.post('/data').then((response) => {
-	        //     console.log(response);
-	        // }, (response) => {
-	        //     console.log(response);
-	        // });
-                // this.$http.post(window.BaseUrl+'/top-product').then(function (response) {
-                // this.list = response.data;
-            // });
+				});
+			}
         },
     }
-
-
 });
 </script>
+<style>
+	.panel-heading a:after {
+    font-family:'Glyphicons Halflings';
+    content:"\e114";
+    float: right;
+    color: grey;
+}
+.panel-heading a.collapsed:after {
+    content:"\e080";
+}
+</style>

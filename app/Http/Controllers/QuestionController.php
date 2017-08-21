@@ -60,6 +60,11 @@ class QuestionController extends Controller
         //
     }
 
+    public function fetchQuestions(Request $request, $testId){
+    	$questions = \App\Test::find($testId)->questions;
+    	return $questions;
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -69,7 +74,8 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        //
+        $question->update($request->activeQuestion);
+        return ['success' => true, 'question' => $question];
     }
 
     /**
@@ -80,6 +86,7 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        //
+        $question->delete();
+        $question->answers()->delete();
     }
 }

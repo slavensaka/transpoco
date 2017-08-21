@@ -21,11 +21,10 @@ class TestController extends Controller
     	return view('tests.index');
     }
 
-     public function fetchTests()
+    public function fetchTests()
     {
     	$tests = Test::all();
     	return $tests;
-    	return ['tests' => $tests];
     }
 
     /**
@@ -84,8 +83,7 @@ class TestController extends Controller
      */
     public function update(Request $request, Test $test)
     {
-        $modelTest = Test::find($test->id);
-        $modelTest->update($request->activeTest);
+        $test->update($request->activeTest);
         return ['success' => true];
     }
 

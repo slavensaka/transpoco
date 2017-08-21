@@ -11,11 +11,12 @@
 |
 */
 
-Route::get('/', function () {
+// Route::get('/', function () {
+	// $answers = App\Question::find(28)->answers;
+ //    	dd($answers);
+    // return view('welcome');
+// });
 
-    return view('welcome');
-});
-
-Route::get('/', 'WelcomeController@index');
+Route::get('/', 'TestController@index');
 
 

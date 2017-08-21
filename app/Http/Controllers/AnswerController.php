@@ -50,10 +50,38 @@ class AnswerController extends Controller
         //
     }
 
+// PREBACI U QUESTIONS
     public function showAnswers(Request $request)
     {
+
     	$answers = Question::find($request->questionId)->answers;
     	return ['success' => true, 'data' => $answers];
+    }
+
+    public function updateAnswer(Request $request, $questionId)
+    {
+    	$answers = Question::find($questionId)->answers;
+    	return ['success' => true, 'data' => $answers];
+    }
+
+    public function fetchAnswer(Request $request)
+    {
+    	$answerId = $request->all();
+    	$answer = Answer::find($answerId);
+    	return response()->json(['answer' => $answer]);
+    }
+
+    public function updateAnswers(Request $request)
+    {
+    	$answerId = $request->all();
+    	$answer = Answer::find($answerId);
+    	return response()->json(['answer' => $answer]);
+    }
+
+    public function fetchAnswers()
+    {
+    	$answers = Answer::all();
+    	return $answers;
     }
 
     /**
@@ -76,7 +104,9 @@ class AnswerController extends Controller
      */
     public function update(Request $request, Answer $answer)
     {
-        //
+        $answer->update($request->activeAnswer);
+        $question = $answer->question;
+        return ['success' => true, 'question' => $question];
     }
 
     /**
@@ -87,6 +117,8 @@ class AnswerController extends Controller
      */
     public function destroy(Answer $answer)
     {
-        //
+    	$question = $answer->question;
+        $answer->delete();
+        return ['success' => true, 'question' => $question];
     }
 }

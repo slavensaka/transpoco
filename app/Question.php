@@ -8,7 +8,6 @@ class Question extends Model
 {
 
 	protected $fillable = array('question','points','test_id');
-	public $timestamps = false;
 
 	public function answers()
 	{

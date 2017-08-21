@@ -19,6 +19,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
+        'about' => $faker->realText($maxNbChars = 200, $indexSize = 2),
+        'user_image' => $faker->imageUrl($width = 100, $height = 100),
         'remember_token' => str_random(10),
     ];
 });
@@ -51,7 +53,7 @@ $factory->define(App\Answer::class, function (Faker\Generator $faker) {
 	$question_id = $faker->numberBetween(1, $questionCount);
     return [
         'answer' => $faker->sentence,
-        'correct' => 0,
+        'correct' => $faker->numberBetween(0,1),
         'question_id' => $question_id,
     ];
 });

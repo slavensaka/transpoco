@@ -35,7 +35,15 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Question::create($request->all());
+        $lastInsertId = \DB::table('questions')->insertGetId($request->all());
+    	return ['success' => true, 'lastInsertId' => $lastInsertId];
+    }
+
+    public function newQuestions($testId)
+    {
+    	$questions = \App\Test::find($testId)->questions;
+    	return $questions;
     }
 
     /**

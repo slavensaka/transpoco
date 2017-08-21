@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('fetchTests', ['uses' => 'TestController@fetchTests']);
 Route::resource('tests', 'TestController');
+Route::get('newQuestions/{id}', ['uses' => 'QuestionController@newQuestions']);
 Route::get('fetchQuestions/{id}', ['uses' => 'QuestionController@fetchQuestions']);
 Route::resource('questions', 'QuestionController');
 

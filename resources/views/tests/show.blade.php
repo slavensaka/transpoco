@@ -8,7 +8,7 @@
 
 
 
-
+		<a class="btn icon-btn btn-success" href="#" data-title="Edit" data-toggle="modal" data-target="#create-question"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle text-success"></span>New question</a>
 
 
 		<div class="row">
@@ -192,6 +192,60 @@
 
 
 
+{{-- CREATE TEST MODAL --}}
+<div class="modal fade" id="create-question" tabindex="-1" role="dialog" aria-labelledby="create" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="Heading">Create a new question</h4>
+      </div>
+          <div class="modal-body">
+				<div class="form-group">
+		          	<label for="question">Question:</label>
+		        	<input id="question" v-model="newQuestion.question" class="form-control " type="text" placeholder="Question">
+		        		<h4>Name:</h4>
+		        </div>
+		       {{--  <div class="form-group">
+		        	<label for="points">Points:</label>
+		        	<textarea rows="2" class="form-control" v-model="newQuestion.points" placeholder="Intro"></textarea>
+	    		</div> --}}
+
+	    		<div class="form-group">
+				    <label for="points">Points</label>
+				    <select class="form-control" id="points" v-model="newQuestion.points">
+				      <option  >1</option>
+				      <option  >2</option>
+				      <option  >3</option>
+				      <option  >4</option>
+				      <option  >5</option>
+				      <option  >6</option>
+				      <option  >7</option>
+				      <option  >8</option>
+				      <option  >9</option>
+				      <option  >10</option>
+				    </select>
+			  </div>
+
+			  <div class="modal-footer ">
+        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" @click="createQuestion($event)"><span class="glyphicon glyphicon-ok-sign" ></span>Create</button>
+      </div>
+      {{--  <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div> --}}
+
+      </div>
+        {{-- <div class="modal-footer ">
+        <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+      </div> --}}
+        </div>
+    <!-- /.modal-content -->
+  </div>
+      <!-- /.modal-dialog -->
+    </div>
+{{-- END CREATE TEST MODAL --}}
+
+
+
 
 
 	</div>
@@ -211,6 +265,7 @@
     	test:test,
     	activeAnswer: {},
     	owner:owner,
+    	newQuestion: {},
     	questions: questions,
     	answers: '',
     	activeQuestionId: '',
@@ -230,7 +285,6 @@
 
 
     	},
-
     	removeQuestion: function() {
     		var self = this;
     		$('#delete-question').modal('hide');
@@ -247,7 +301,37 @@
 	        self.activeDeleteQuestionId = {};
     	},
 
+    	createQuestion: function(event) {
+    		var self = this;
+    		this.newQuestion.test_id = JSON.parse(JSON.stringify(this.test.id));
+			this.$http.post(ajax_url + '/api/questions',this.newQuestion)
+			.then((response) => {
 
+				$("#create-question").modal('hide');
+				this.newQuestions(response.body.lastInsertId)
+				new PNotify({title:"Success", text:"Successfully created new test"});
+				self.createQuestion = {};
+			  }, (response) => {
+
+		    });
+
+
+
+    	},
+
+    	newQuestions: function (lastInsertId) {
+
+			this.$http.get('/api/newQuestions/' + this.test.id, function (data) {
+
+			}).then(function (response) {
+
+				this.$set(this, 'questions', response.body)
+            }, function (response) {
+
+            }).finally(function () {
+
+            });
+		},
     	editQuestion: function(activeQuestion) {
     		var self = this;
             this.$http.patch(ajax_url + '/api/questions/' + this.activeQuestion.id, {

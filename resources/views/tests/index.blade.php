@@ -111,7 +111,7 @@
 				<div class="form-group">
 		          	<label for="test_name">Test Name:</label>
 		        	<input id="test_name" v-model="newTest.test_name" class="form-control " type="text" placeholder="Test name">
-		        		<h4>Name: @{{activeTest.test_name}}</h4>
+		        		{{-- <h4>Name: @{{activeTest.test_name}}</h4> --}}
 		        </div>
 		        <div class="form-group">
 		        	<label for="intro">Intro:</label>
@@ -232,7 +232,7 @@
     	createTest: function(event) {
     		var self = this;
     		this.newTest.intro_image = 'https://lorempixel.com/100/100/?62058'; // Example image
-
+    			console.log(JSON.stringify(this.newTest));
 			this.$http.post(ajax_url + '/api/tests',this.newTest).then((response) => {
 				$("#createTest").modal('hide');
 				this.fetchTest()

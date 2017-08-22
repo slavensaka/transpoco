@@ -14,19 +14,20 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $fillable = ['name', 'email', 'password',];
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token',];
 
+    /**
+     *
+     * Retrieve tests for the user
+     *
+     */
     public function tests()
 	{
 		return $this->hasMany('App\Test');
@@ -34,10 +35,9 @@ class User extends Authenticatable
 
     /**
     *
-    * Has many thorugh User -
+    * Has questions for user through the test
     *
     **/
-
 	public function questions()
     {
         return $this->hasManyThrough('App\Question', 'App\Test','id', 'user_id');

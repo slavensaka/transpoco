@@ -36,7 +36,8 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    	Answer::create($request->all());
+    	return ['success' => true];
     }
 
     /**
@@ -48,40 +49,6 @@ class AnswerController extends Controller
     public function show(Answer $answer)
     {
         //
-    }
-
-// PREBACI U QUESTIONS
-    public function showAnswers(Request $request)
-    {
-
-    	$answers = Question::find($request->questionId)->answers;
-    	return ['success' => true, 'data' => $answers];
-    }
-
-    public function updateAnswer(Request $request, $questionId)
-    {
-    	$answers = Question::find($questionId)->answers;
-    	return ['success' => true, 'data' => $answers];
-    }
-
-    public function fetchAnswer(Request $request)
-    {
-    	$answerId = $request->all();
-    	$answer = Answer::find($answerId);
-    	return response()->json(['answer' => $answer]);
-    }
-
-    public function updateAnswers(Request $request)
-    {
-    	$answerId = $request->all();
-    	$answer = Answer::find($answerId);
-    	return response()->json(['answer' => $answer]);
-    }
-
-    public function fetchAnswers()
-    {
-    	$answers = Answer::all();
-    	return $answers;
     }
 
     /**
@@ -121,4 +88,56 @@ class AnswerController extends Controller
         $answer->delete();
         return ['success' => true, 'question' => $question];
     }
+
+    /**
+     *
+     * retrieve all answers for question
+     *
+     */
+    public function showAnswers(Request $request)
+    {
+    	$answers = Question::find($request->questionId)->answers;
+    	return ['success' => true, 'data' => $answers];
+    }
+
+    /**
+     *
+     * Update the answer
+     *
+     */
+    public function updateAnswer(Request $request, $questionId)
+    {
+    	$answers = Question::find($questionId)->answers;
+    	return ['success' => true, 'data' => $answers];
+    }
+
+    /**
+     *
+     * Retrieve answer
+     *
+     */
+    public function fetchAnswer(Request $request)
+    {
+    	$answerId = $request->all();
+    	$answer = Answer::find($answerId);
+    	return response()->json(['answer' => $answer]);
+    }
+
+    /**
+     *
+     * Block comment
+     *
+     */
+    // public function updateAnswers(Request $request)
+    // {
+    // 	$answerId = $request->all();
+    // 	$answer = Answer::find($answerId);
+    // 	return response()->json(['answer' => $answer]);
+    // }
+
+    // public function fetchAnswers()
+    // {
+    // 	$answers = Answer::all();
+    // 	return $answers;
+    // }
 }

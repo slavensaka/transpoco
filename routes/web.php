@@ -10,13 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-	// $answers = App\Question::find(28)->answers;
- //    	dd($answers);
-    // return view('welcome');
-// });
-
+// Root
 Route::get('/', 'TestController@index');
 
 

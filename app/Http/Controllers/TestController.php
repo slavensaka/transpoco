@@ -95,8 +95,6 @@ class TestController extends Controller
      */
     public function destroy(Test $test)
     {
-    	// Item::find($id)->delete();
-     //    return response()->json(['done']);
     	\Log::alert($test);
         $test->delete();
         $test->questions()->delete();

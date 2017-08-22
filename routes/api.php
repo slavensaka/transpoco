@@ -12,20 +12,15 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
+// Tests Routes
 Route::get('fetchTests', ['uses' => 'TestController@fetchTests']);
 Route::resource('tests', 'TestController');
+// Questions Routes
 Route::get('newQuestions/{id}', ['uses' => 'QuestionController@newQuestions']);
 Route::get('fetchQuestions/{id}', ['uses' => 'QuestionController@fetchQuestions']);
 Route::resource('questions', 'QuestionController');
-
+// Answers Routes
 Route::get('updateAnswer/{id}', ['uses' => 'AnswerController@updateAnswer']);
-
 Route::get('showAnswers', ['uses' => 'AnswerController@showAnswers']);
 Route::get('fetchAnswer', ['uses' => 'AnswerController@fetchAnswer']);
-Route::get('fetchAnswers', ['uses' => 'AnswerController@fetchAnswers']);
 Route::resource('answers', 'AnswerController');

@@ -1,10 +1,8 @@
-make a CRUD app.
+MAKE A CRUD APP
 1. The front end should be built in javascript which interacts with a
 2. REST API which needs to be written in PHP.
 
-
-
-
+Other:
 1. Am I allowed to use PHP & javascript libraries & frameworks or using just PHP and Javascript?
 1. Other than making sure that you provide a javascript front end that talks to a PHP based REST API you are free to pick which ever tools/frameworks you want to use.
 2. Should the front-end by styled with CSS and Javascript, or just a basic outline?
@@ -12,6 +10,42 @@ make a CRUD app.
 3. Creating a database with MySQL is ok to do, so that I can persist the data or should it be just
 3. It is preferred that you use a database in order to demonstrate the full functionality of the app.
 
-
 free to use which ever tooling you want to use, be that vue.js, jquery or other javascript library.
 
+
+INSTRUCTIONS:
+
+1. Download project from github(clone project or zip file)
+2. cd to project root (.../transpoco-master)
+3. type 'composer install'
+4. Create file in root (.../transpoco-master) called .env and populate with
+	APP_ENV=local
+	APP_DEBUG=true
+	APP_KEY=a5UFo1XZjUkTc95hBfk226jHnYHQtRO3
+	DB_HOST=localhost
+	DB_DATABASE=transpoco
+	DB_USERNAME=homestead
+	DB_PASSWORD=secret
+	DB_CONNECTION=mysql
+
+5. Open wamp or lamp stack or maybe use laravels vagrant box "Homestead" and configure the database. Use transpoco.sql import.
+
+6. Create a database named 'transpoco', change DB_USERNAME and DBPASSWORD to appropriate
+or in console type 'php artisan migrate' to migrate the database
+then 'php artisan db:seed' to populate the tables with dummy data
+
+7. Then run a basic server 'php artisan serve' or use Homestead
+
+8. visit http://localhost:8000/ in browser to see the test
+
+
+Explanation
+There are users that can create tests
+Tests have questions and question have answers.
+It's all connected with eloquent ORM.
+Didn't bother with users and seeing which user is logged in.
+That would be a login system which was not need to be made.
+
+Used Laravel, Vue.js, Boostrap, Css + some more.
+
+Any questions contact me at slavensakacic@gmail.com
